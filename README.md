@@ -125,6 +125,6 @@ Ensure your cluster meets compliance and disaster recovery standards.
 To get started with the hands-on projects:
 
 ```bash
-git clone <your-repo-link>
-cd <repo-name>
+git clone https://github.com/sergio-a-juarez-1/Kubernetes.git
+cd Kubernetes
 ```
