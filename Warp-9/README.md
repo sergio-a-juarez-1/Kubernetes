@@ -3,7 +3,7 @@
 ### About Warp 9 Kubernetes Training
 * **Goal:** Teach Kubernetes quickly and easily, cutting out the fluff so you can use the tech in production and ace interviews in the shortest time possible.
 * **Topics Covered:** Cluster orchestration, core Kubernetes building blocks (Pods, Deployments, Services), YAML configurations, and deploying scalable workloads into production.
-* **Availability:** You can find these programs directly on the [Warp 9 K8s Category Page](https://warp-9.com/courses/category/k8s) or streaming via the [Udemy Course Platform](https://www.udemy.com/course/kubernetes-fast-track/). 
+* **Availability:** You can find these programs directly on the [Warp 9 K8s Category Page](https://warp-9.com/courses/category/k8s) or streaming via the [Udemy Course Platform](https://www.udemy.com/course/kubernetes-fast-track/)
 
 ### Other Warp 9 Courses
-* Ultimate Docker Fast-Track
+* [Ultimate Docker Fast-Track](https://github.com/sergio-a-juarez-1/Docker/tree/main/Warp-9)
