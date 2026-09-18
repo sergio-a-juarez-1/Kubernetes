@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: krb5-config
+data:
+  krb5.conf: |
+    [libdefaults]
+        default_realm = SNAKEGAME.LOCAL
+        dns_lookup_realm = false
+        dns_lookup_kdc = false
+        ticket_lifetime = 24h
+        renew_lifetime = 7d
+        forwardable = true
+
+    [realms]
+        SNAKEGAME.LOCAL = {
+            kdc = 127.0.0.1:88
+            admin_server = 127.0.0.1:749
+        }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kerberized-snake-game
+  labels:
+    app: snake-game
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: snake-game
+  template:
+    metadata:
+      labels:
+        app: snake-game
+    spec:
+      volumes:
+        - name: krb5-config-volume
+          configMap:
+            name: krb5-config
+        - name: shared-keytabs
+          emptyDir: {}
+      containers:
+        # Container 1: The Python Snake Game App
+        - name: snake-app
+          image: local-snake/game:1.0
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: PYTHONUNBUFFERED
+              value: "1"
+          ports: # <-- Add this ports block
+            - containerPort: 5900
+              name: vnc
+
+
+        # Container 2: The Kerberos Key Distribution Center (KDC) Server Sidecar
+        # This setup demonstrates your mastery of pod sidecar patterns and localized service loopbacks
+        # Container 2: The Kerberos Key Distribution Center (KDC) Server Sidecar
+        # Updated to a universally verified, lightweight public testing image
+        # Container 2: The Kerberos Key Distribution Center (KDC) Server Sidecar
+        - name: kdc-server
+          image: local-kerberos/kdc:1.0       # <-- Updated to your new local image
+          imagePullPolicy: IfNotPresent        # <-- Tells K8s to look at Minikube's local cache
+          volumeMounts:
+            - name: krb5-config-volume
+              mountPath: /etc/krb5.conf
+              subPath: krb5.conf
+            - name: shared-keytabs
+              mountPath: /var/kerberos
+          ports:
+            - containerPort: 88
+              name: kerberos-udp
+              protocol: UDP
+            - containerPort: 749
+              name: kadmin-tcp
+              protocol: TCP
