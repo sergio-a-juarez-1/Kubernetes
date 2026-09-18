@@ -1,3 +1,5 @@
+![Snake Gameplay](https://github.com/sergio-a-juarez-1/C-practice/blob/main/Images/snake_game.gif?raw=true)
+
 # 🐍 Kerberized Multi-Container Python Snake Game (Kubernetes & VNC)
 
 A cloud-native, microservice-architected **Python Snake Game** written with the standard `turtle` graphics library and fully containerized to run inside a **Kubernetes cluster**. This architecture showcases advanced DevOps patterns, including a multi-container **Kerberos Key Distribution Center (KDC) sidecar**, a headless virtual frame-buffer canvas, grid-aligned gameplay, and persistent keyboard input event mapping streamed live over an isolated VNC network tunnel.
