@@ -191,6 +191,48 @@ Valid starting       Expires              Service principal
 
 ---
 
+## 🛑 Teardown & Cluster Cleanup
+
+When you are done playing and testing, run this sequence to safely drop the network tunnels, delete active cluster pods, and free up system memory and storage resources on your host machine.
+
+### 1. Stop the Port-Forward Tunnel
+Go to the active terminal tab where your network proxy tunnel is running and terminate the process:
+```bash
+Ctrl + C
+```
+
+### 2. Delete the Manifest Infrastructure Layers
+Wipe the active `Deployment`, `ConfigMap`, and RBAC configurations completely out of your cluster memory workspace:
+```bash
+kubectl delete -f k8s-snake-kerberos.yaml
+```
+
+### 3. Power Down the Cluster Engine
+Stop the underlying Minikube virtual machine or container background instance to reclaim your local CPU and RAM resources:
+```bash
+minikube stop
+```
+
+---
+
+## 🧹 Hard Drive Space Optimization (Optional)
+
+If you are finalizing your project lab and want to completely clear out local container image fragments and build cache data from your computer's hard drive, execute this deep cleanup sequence:
+
+```bash
+# 1. Purge the sideloaded images inside Minikube's containerd registry
+minikube image rm local-snake/game:1.0 local-kerberos/kdc:1.0
+
+# 2. Delete the compiled layers from your computer's native host Docker engine
+docker rmi local-snake/game:1.0 local-kerberos/kdc:1.0
+
+# 3. Securely sweep away dangling build caches
+docker builder prune -f
+```
+
+
+---
+
 ## 📂 Project Manifest Blueprint
 
 ```text
