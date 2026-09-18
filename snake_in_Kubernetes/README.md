@@ -33,16 +33,16 @@ To run this application without pushing images to public registries like Docker 
 Run this sequence to extract your active game workspace and safely wipe the redundant parent directory to clear system clutter:
 ```bash
 # 1. Clone the parent repository configuration
-git clone https://github.com/sergio-a-juarez-1/Docker.git
+git clone https://github.com/sergio-a-juarez-1/Kubernetes.git
 
 # 2. Structure your clean project home directory workspace
 mkdir -p ~/snake_in_Kubernetes
 
 # 3. Safely copy only the containerized snake game assets out of the repository folder
-cp -r Docker/Kubernetes/snake_in_Kubernetes/* ~/snake_in_Kubernetes/
+cp -r Kubernetes/snake_in_Kubernetes/* ~/snake_in_Kubernetes/
 
 # 4. Safely wipe the redundant repository directory root from your Downloads
-rm -rf Docker
+rm -rf Kubernetes
 
 # 5. Move into your active standalone environment space
 cd ~/snake_in_Kubernetes
