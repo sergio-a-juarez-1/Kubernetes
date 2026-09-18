@@ -25,18 +25,37 @@ A cloud-native, microservice-architected **Python Snake Game** written with the 
 
 ---
 
-## 🐳 Step 1: Local Image Compilation
+## 🐳 Step 1: Clone, Clean, and Compile
 
-To run this application without pushing images to public registries like Docker Hub, you must build your containers locally on your host machine.
+To run this application without pushing images to public registries like Docker Hub, clone the parent repository, extract the Kubernetes game files, and compile your container layers locally on your host machine.
 
-### 1. Build the Headless Snake Game Image
-Create your main `Dockerfile` and compile the package:
+### 1. Clone and Prepare the Game Directory
+Run this sequence to extract your active game workspace and safely wipe the redundant parent directory to clear system clutter:
+```bash
+# 1. Clone the parent repository configuration
+git clone https://github.com/sergio-a-juarez-1/Docker.git
+
+# 2. Structure your clean project home directory workspace
+mkdir -p ~/snake_in_Kubernetes
+
+# 3. Safely copy only the containerized snake game assets out of the repository folder
+cp -r Docker/Kubernetes/snake_in_Kubernetes/* ~/snake_in_Kubernetes/
+
+# 4. Safely wipe the redundant repository directory root from your Downloads
+rm -rf Docker
+
+# 5. Move into your active standalone environment space
+cd ~/snake_in_Kubernetes
+```
+
+### 2. Build the Headless Snake Game Image
+Compile your main game package with its headless display and VNC streaming dependencies:
 ```bash
 docker build -t local-snake/game:1.0 .
 ```
 
-### 2. Build the Independent Kerberos KDC Server Image
-Create a file named `Kdc.dockerfile` and build the local authentication database backend:
+### 3. Build the Independent Kerberos KDC Server Image
+Compile the local Kerberos authentication backend database layer:
 ```bash
 docker build -f Kdc.dockerfile -t local-kerberos/kdc:1.0 .
 ```
